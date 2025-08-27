@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: jagx-bot-server
+    env: node
+    repo: https://github.com/jagwazorld-max/jagX-bot-
+    branch: main
+    buildCommand: npm install
+    startCommand: sh -c "node src/pairing-server.js & node src/bot.js"
+    envVars:
+      - key: PAIR_SERVER
+        value: "http://localhost:4260"
+      - key: BOT_PHONE
+        value: "1234567890"
+      - key: DATA_DIR
+        value: "/data"
+    disk:
+      name: jagx-data
+      mountPath: /data
+      sizeGB: 1
+    autoDeploy: true
+    ports:
+      - 4260
